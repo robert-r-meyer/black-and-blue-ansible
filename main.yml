@@ -1,0 +1,65 @@
+---
+# This playbook prints a simple debug message
+- name: Emby Mounts In FSTAB
+  hosts: base
+  vars:
+    emby_mounts:
+      - name: Motor Sports
+        mount: /media/motor_sports
+        path: /mnt/RAID-5TB/motor_sports
+      - name: Animated
+        mount: /media/animated
+        path: /mnt/RAID-5TB/animated
+      - name: Comedy
+        mount: /media/comedy
+        path: /mnt/RAID-5TB/comedy
+      - name: Complete
+        mount: /media/complete
+        path: /mnt/RAID-5TB/complete
+      - name: Curling
+        mount: /media/curling
+        path: /mnt/RAID-5TB/curling
+      - name: Delete After Seed
+        mount: /media/delete_after_seed
+        path: /mnt/RAID-5TB/delete_after_seed
+      - name: Movies
+        mount: /media/movies
+        path: /mnt/RAID-5TB/movies
+      - name: Music
+        mount: /media/music
+        path: /mnt/RAID-5TB/music
+      - name: Track Days
+        mount: /media/track_days
+        path: /mnt/RAID-5TB/track_days
+      - name: TV
+        mount: /media/tv
+        path: /mnt/RAID-5TB/tv
+    device:
+      username: '{{ username | default(dr720) }}'
+
+  tasks:
+  - name: Add RAID mount To FSTAB
+    become: yes
+    blockinfile:
+      path: /etc/fstab
+      state: present
+      block: |
+        /dev/sdb1 /media/RAID-3TB ext4 defaults 0 2
+
+
+  - name: the list
+    debug:
+      msg: "{{ item.name }}"
+    with_items:
+      " {{ emby_mounts }}"
+
+  - name: Add Emby
+    become: yes
+    blockinfile:
+      path: /etc/fstab
+      state: present
+      block: |
+        "//{{ item.mount }} {{ item.path }}  cifs credentials=/home/username/.smbcredentials,uid=shareuser,gid=sharegroup 0 2"
+    with_items:
+      - "{{ emby_mounts }}"
+
