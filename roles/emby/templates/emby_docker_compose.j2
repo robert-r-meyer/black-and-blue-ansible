@@ -1,0 +1,27 @@
+version: "2.3"
+services:
+  emby:
+    image: emby/embyserver
+    container_name: embyserver
+      # runtime: nvidia # Expose NVIDIA GPUs
+      # network_mode: host # Enable DLNA and Wake-on-Lan
+    volumes:
+      - //{{ remote_server }}/{{ remote_10_tb }}/emby-cache:/system/cache
+      - //{{ remote_server }}/{{ remote_10_tb }}/emby-metadata:/system/metadata
+
+      - //{{ remote_server }}/{{ remote_10_tb }}/Cartoons:/media/Cartoons
+      - //{{ remote_server }}/{{ remote_10_tb }}/Comedy:/media/Comedy
+      - //{{ remote_server }}/{{ remote_10_tb }}/Curling:/media/Curling
+      - //{{ remote_server }}/{{ remote_10_tb }}/MotorSports:/media/MotorSports
+      - //{{ remote_server }}/{{ remote_10_tb }}/Movies:/media/Movies
+
+      - //{{ remote_server }}/{{ remote_5_tb }}/Complete:/media/Complete
+      - //{{ remote_server }}/{{ remote_5_tb }}/CrapToDeleteAfterSeed:/media/CrapToDeleteAfterSeed
+      - //{{ remote_server }}/{{ remote_5_tb }}/Music:/media/Music
+      - //{{ remote_server }}/{{ remote_5_tb }}/track-days:/media/track-days
+
+      - //{{ remote_server }}/{{ remote_data }}/TV:/media/TV
+    ports:
+      - 8096:8096 # HTTP port
+      - 8920:8920 # HTTPS port
+    restart: on-failure

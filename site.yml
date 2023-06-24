@@ -5,12 +5,21 @@
   vars_prompt:
     - name: samba_server_username
       prompt: Samba Server Username
+      default: dr720
+
     - name: samba_server_password
       prompt: Samba Server Password
+      default: dr720
+
     - name: samba_server_domain
       prompt: Samba Server Domain
+      default: dr720
+
   vars:
     host_server: 192.168.7.29
+
+    username: dr720
+
     emby_mounts:
       - name: Motor Sports
         postfix: motor_sports
@@ -42,6 +51,7 @@
       - name: TV
         postfix: tv
         core_path: RAID-5TB
+
     single_mounts:
       - name: RAID-5TB
         core_path: /media/RAID-5TB
@@ -51,7 +61,6 @@
         core_path: /media/RAID-15
       - name: RAID-Data
         core_path: /media/RAID-Data
-    username: dr720
 
   tasks:
     - name: the list
@@ -59,10 +68,12 @@
         msg: "{{ item.name }}"
       with_items:
         " {{ emby_mounts }}"
+      when: false
 
     - name: Retrieve host vars
       debug:
-        var=hostvars[inventory_hostname]
+        var=hostvars[inventory_hostname][ansible_hostname]
+      when: true
 
     - name: Template file to smbcredentials
       ansible.builtin.template:
@@ -80,14 +91,21 @@
         path: /media/RAID-3TB
         state: present
 
+    - name: Mount local RAID-4TB to fstab
+      become: yes
+      ansible.posix.mount:
+        fstype: ext4
+        src: /dev/sdc1
+        path: /media/RAID-4TB
+        state: present
 
     - name: Mount with Postfix
       become: yes
       ansible.posix.mount:
         fstype: cifs
         opts: "credentials=/home/{{ username }}/.smbcredentials,uid={{ username }},gid={{ username }}"
-        src: "//{{ host_server }}/{{ name }}"
-        path: "{{ item.core_path}}"
+        src: "//{{ host_server }}/{{ item.name }}"
+        path: "{{ item.core_path }}"
         state: mounted
       with_items:
         "{{ single_mounts }}"
