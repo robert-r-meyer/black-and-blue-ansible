@@ -12,7 +12,7 @@
     name: samba
     state: present
 
-- name: Install fish 
+- name: Install fish
   become: yes
   ansible.builtin.dnf:
     name: fish
