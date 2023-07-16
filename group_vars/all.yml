@@ -1,0 +1,51 @@
+---
+
+host_server: 192.168.7.29
+
+username: dr720
+samba_server_username: dr720
+samba_server_domain: dr720
+samba_server_password: dr720
+
+emby_mounts:
+  - name: Motor Sports
+    postfix: motor_sports
+    core_path: 5TB
+  - name: Animated
+    postfix: animated
+    core_path: 5TB
+  - name: Comedy
+    postfix: comedy
+    core_path: 4TB
+  - name: Complete
+    postfix: complete
+    core_path: 5TB
+  - name: Curling
+    postfix: curling
+    core_path: 4TB
+  - name: Delete After Seed
+    postfix: delete_after_seed
+    core_path: 5TB
+  - name: Movies
+    postfix: movies
+    core_path: 5TB
+  - name: Music
+    postfix: music
+    core_path: 5TB
+  - name: Track Days
+    postfix: track_days
+    core_path: 5TB
+  - name: TV
+    postfix: tv
+    core_path: 5TB
+
+single_mounts:
+  - name: 5TB
+    core_path: /media/5TB
+  - name: 10TB
+    core_path: /media/10TB
+  - name: 15
+    core_path: /media/15
+  - name: Data
+    core_path: /media/Data
+

@@ -1,0 +1,48 @@
+---
+
+- name: the list
+  debug:
+    msg: "{{ item.name }}"
+  with_items:
+    " {{ emby_mounts }}"
+  when: false
+
+- name: Retrieve host vars
+  debug:
+    var=hostvars[inventory_hostname][ansible_hostname]
+  when: true
+
+- name: Template file to smbcredentials
+  ansible.builtin.template:
+    src: templates/smbcredentials.j2
+    dest: "/home/{{ username }}/.smbcredentials"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0644"
+
+- name: Mount local 3TB to fstab
+  become: yes
+  ansible.posix.mount:
+    fstype: ext4
+    src: /dev/sdb1
+    path: /media/3TB
+    state: present
+
+- name: Mount local 4TB to fstab
+  become: yes
+  ansible.posix.mount:
+    fstype: ext4
+    src: /dev/sdc1
+    path: /media/4TB
+    state: present
+
+- name: Mount with Postfix
+  become: yes
+  ansible.posix.mount:
+    fstype: cifs
+    opts: "credentials=/home/{{ username }}/.smbcredentials,uid={{ username }},gid={{ username }}"
+    src: "//{{ host_server }}/{{ item.name }}"
+    path: "{{ item.core_path }}"
+    state: mounted
+  with_items:
+    "{{ single_mounts }}"

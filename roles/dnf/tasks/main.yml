@@ -1,0 +1,30 @@
+---
+
+- name: Upgrade all packages
+  become: yes
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+
+- name: Install Samba
+  become: yes
+  ansible.builtin.dnf:
+    name: samba
+    state: present
+
+- name: Install fish 
+  become: yes
+  ansible.builtin.dnf:
+    name: fish
+    state: present
+
+- name: Install the 'Development tools' package group
+  become: yes
+  ansible.builtin.dnf:
+    name: '@Development tools'
+    state: present
+
+- name: Autoremove unneeded packages installed as dependencies
+  become: yes
+  ansible.builtin.dnf:
+    autoremove: yes

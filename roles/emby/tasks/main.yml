@@ -1,0 +1,6 @@
+---
+
+- name: Mount remote drives
+  ansible.builtin.include_role:
+    name: mounts
+    tasks_from: mounts

@@ -1,7 +1,6 @@
 ---
-# This playbook prints a simple debug message
-- name: Emby Mounts In FSTAB
-  hosts: base
+
+- hosts: all
   vars_prompt:
     - name: samba_server_username
       prompt: Samba Server Username
@@ -15,97 +14,8 @@
       prompt: Samba Server Domain
       default: dr720
 
-  vars:
-    host_server: 192.168.7.29
-
-    username: dr720
-
-    emby_mounts:
-      - name: Motor Sports
-        postfix: motor_sports
-        core_path: RAID-5TB
-      - name: Animated
-        postfix: animated
-        core_path: RAID-5TB
-      - name: Comedy
-        postfix: comedy
-        core_path: RAID-5TB
-      - name: Complete
-        postfix: complete
-        core_path: RAID-5TB
-      - name: Curling
-        postfix: curling
-        core_path: RAID-5TB
-      - name: Delete After Seed
-        postfix: delete_after_seed
-        core_path: RAID-5TB
-      - name: Movies
-        postfix: movies
-        core_path: RAID-5TB
-      - name: Music
-        postfix: music
-        core_path: RAID-5TB
-      - name: Track Days
-        postfix: track_days
-        core_path: RAID-5TB
-      - name: TV
-        postfix: tv
-        core_path: RAID-5TB
-
-    single_mounts:
-      - name: RAID-5TB
-        core_path: /media/RAID-5TB
-      - name: RAID-10TB
-        core_path: /media/RAID-10TB
-      - name: RAID-15
-        core_path: /media/RAID-15
-      - name: RAID-Data
-        core_path: /media/RAID-Data
-
-  tasks:
-    - name: the list
-      debug:
-        msg: "{{ item.name }}"
-      with_items:
-        " {{ emby_mounts }}"
-      when: false
-
-    - name: Retrieve host vars
-      debug:
-        var=hostvars[inventory_hostname][ansible_hostname]
-      when: true
-
-    - name: Template file to smbcredentials
-      ansible.builtin.template:
-        src: templates/smbcredentials.j2
-        dest: "/home/{{ username }}/.smbcredentials"
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: "0644"
-
-    - name: Mount local RAID-3TB to fstab
-      become: yes
-      ansible.posix.mount:
-        fstype: ext4
-        src: /dev/sdb1
-        path: /media/RAID-3TB
-        state: present
-
-    - name: Mount local RAID-4TB to fstab
-      become: yes
-      ansible.posix.mount:
-        fstype: ext4
-        src: /dev/sdc1
-        path: /media/RAID-4TB
-        state: present
-
-    - name: Mount with Postfix
-      become: yes
-      ansible.posix.mount:
-        fstype: cifs
-        opts: "credentials=/home/{{ username }}/.smbcredentials,uid={{ username }},gid={{ username }}"
-        src: "//{{ host_server }}/{{ item.name }}"
-        path: "{{ item.core_path }}"
-        state: mounted
-      with_items:
-        "{{ single_mounts }}"
+- hosts: apt
+  roles:
+    - apt
+    - common
+    - emby

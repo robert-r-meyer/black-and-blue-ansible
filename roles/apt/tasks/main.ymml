@@ -1,0 +1,19 @@
+---
+
+- name: Upgrade all packages
+  become: yes
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+
+- name: Install development tools
+  name: "build-essential"
+  state: latest
+
+- name: Upgrade the OS (apt-get dist-upgrade)
+  ansible.builtin.apt:
+    upgrade: dist
+
+- name: Run the equivalent of "apt-get clean" as a separate step
+  apt:
+    clean: yes

@@ -1,5 +1,8 @@
-[local]
-localhost
+[emby]
+fedora.cartermeyer.us ansible_user=blackandblue
 
-[base]
-192.168.7.217
+[apt]
+ubuntu.cartermeyer.us ansible_user=ubuntu
+
+[dnf]
+fedora.cartermeyer.us ansible_user=blackandblue
