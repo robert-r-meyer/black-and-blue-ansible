@@ -7,14 +7,17 @@
     state: latest
 
 - name: Install development tools
+  become: yes
   ansible.builtin.apt:
     name: "build-essential"
     state: latest
 
 - name: Upgrade the OS (apt-get dist-upgrade)
+  become: yes
   ansible.builtin.apt:
     upgrade: dist
 
 - name: Run the equivalent of "apt-get clean" as a separate step
+  become: yes
   apt:
     clean: yes
