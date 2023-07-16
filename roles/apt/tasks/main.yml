@@ -6,6 +6,18 @@
     name: "*"
     state: latest
 
+- name: Install Samba
+  become: yes
+  ansible.builtin.apt:
+    name: samba
+    state: present
+
+- name: Install fish
+  become: yes
+  ansible.builtin.apt:
+    name: fish
+    state: present
+
 - name: Install development tools
   become: yes
   ansible.builtin.apt:
