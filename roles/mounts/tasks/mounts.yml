@@ -15,9 +15,9 @@
 - name: Template file to smbcredentials
   ansible.builtin.template:
     src: templates/smbcredentials.j2
-    dest: "/home/{{ username }}/.smbcredentials"
-    owner: "{{ username }}"
-    group: "{{ username }}"
+    dest: "/home/{{ ansible_user }}/.smbcredentials"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     mode: "0644"
 
 - name: Mount local 3TB to fstab
@@ -40,7 +40,7 @@
   become: yes
   ansible.posix.mount:
     fstype: cifs
-    opts: "credentials=/home/{{ username }}/.smbcredentials,uid={{ username }},gid={{ username }}"
+    opts: "credentials=/home/{{ ansible_user }}/.smbcredentials,uid={{ samba_server_username }},gid={{ samba_server_username }}"
     src: "//{{ host_server }}/{{ item.name }}"
     path: "{{ item.core_path }}"
     state: mounted
