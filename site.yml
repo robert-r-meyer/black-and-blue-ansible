@@ -14,8 +14,11 @@
       prompt: Samba Server Domain
       default: dr720
 
-- hosts: apt
+- hosts: all
   roles:
-    - apt
     - common
-    - emby
+
+- hosts: emby
+  roles:
+    - mounts
+

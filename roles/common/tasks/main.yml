@@ -1,2 +1,16 @@
 ---
 
+- name: Install required apt packages
+  ansible.builtin.include_role:
+    name: apt
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install required DNF packages
+  ansible.builtin.include_role:
+    name: dnf
+  when: ansible_distribution == "Fedora"
+
+
+- name: Mount Samba network drives
+  ansible.builtin.include_role:
+    name: emby
