@@ -4,3 +4,8 @@
   ansible.builtin.include_role:
     name: mounts
     tasks_from: mounts
+
+- name: Fuck your
+  ansible.builtin.debug:
+    var: ansible_distribution
+    verbosity: 2

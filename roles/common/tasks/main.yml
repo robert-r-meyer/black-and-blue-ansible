@@ -5,12 +5,21 @@
     name: apt
   when: ansible_distribution == "Ubuntu"
 
+- name: List Distribution
+  ansible.builtin.debug:
+    msg: Machine {{ inventory_hostname }} has distribution {{ ansible_distribution }}
+
 - name: Install required DNF packages
   ansible.builtin.include_role:
     name: dnf
   when: ansible_distribution == "Fedora"
 
+- name: Install required zypper packages
+  ansible.builtin.include_role:
+    name: zypper
+  when: ansible_distribution == "OpenSUSE Tumbleweed"
 
 - name: Mount Samba network drives
   ansible.builtin.include_role:
     name: emby
+
