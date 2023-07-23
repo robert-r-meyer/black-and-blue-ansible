@@ -1,35 +1,82 @@
 ---
 
 - name: Upgrade all packages
-  become: yes
   ansible.builtin.apt:
     name: "*"
     state: latest
 
 - name: Install Samba
-  become: yes
   ansible.builtin.apt:
     name: samba
     state: present
 
 - name: Install fish
-  become: yes
   ansible.builtin.apt:
     name: fish
     state: present
 
 - name: Install development tools
-  become: yes
   ansible.builtin.apt:
     name: "build-essential"
     state: latest
 
 - name: Upgrade the OS (apt-get dist-upgrade)
-  become: yes
   ansible.builtin.apt:
     upgrade: dist
 
+- name: Install aptitude
+  apt:
+    name: aptitude
+    state: latest
+
+- name: Install required system packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+    state: latest
+    update_cache: true
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
+
+- name: Install Docker Module for Python
+  pip:
+    name: docker
+
 - name: Run the equivalent of "apt-get clean" as a separate step
-  become: yes
   apt:
     clean: yes

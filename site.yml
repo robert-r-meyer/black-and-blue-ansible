@@ -15,13 +15,16 @@
       default: dr720
 
 - hosts: all
+  become: yes
   roles:
     - common
 
 - hosts: data_source_mounts
+  become: yes
   roles:
     - data_source_mounts
 
 - hosts: apt
+  become: yes
   roles:
     - apt

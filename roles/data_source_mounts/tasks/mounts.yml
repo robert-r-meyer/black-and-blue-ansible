@@ -21,7 +21,6 @@
     mode: "0644"
 
 - name: Mount local 3TB to fstab
-  become: yes
   ansible.posix.mount:
     fstype: ext4
     src: /dev/sdb1
@@ -29,7 +28,6 @@
     state: present
 
 - name: Mount local 4TB to fstab
-  become: yes
   ansible.posix.mount:
     fstype: ext4
     src: /dev/sdc1
@@ -37,7 +35,6 @@
     state: present
 
 - name: Mount with Postfix
-  become: yes
   ansible.posix.mount:
     fstype: cifs
     opts: "credentials=/home/{{ ansible_user }}/.smbcredentials,uid={{ samba_server_username }},gid={{ samba_server_username }}"
