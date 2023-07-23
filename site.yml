@@ -18,7 +18,10 @@
   roles:
     - common
 
-- hosts: emby
+- hosts: data_source_mounts
   roles:
-    - mounts
+    - data_source_mounts
 
+- hosts: apt
+  roles:
+    - apt

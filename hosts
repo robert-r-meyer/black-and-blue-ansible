@@ -1,17 +1,2 @@
-[emby]
-fedora.cartermeyer.us ansible_user=ansible
-
 [apt]
 ubuntu.cartermeyer.us ansible_user=ansible
-
-[zepher]
-opensuse.cartermeyer.us ansible_user=ansible
-
-[emby_server]
-opensuse.cartermeyer.us ansible_user=ansible
-
-[factorio]
-factorio.cartermeyer.us ansible_user=ansible
-
-[dnf]
-fedora.cartermeyer.us ansible_user=ansible
