@@ -1,0 +1,11 @@
+---
+
+# - name: Configure samba user
+#   ansible.builtin.command:
+#     cmd: "smbpasswd -a {{ samba_server_username|quote }} -n"
+
+# - name: Add shares to smb.conf
+#   blockinfile:
+#     path: /etc/samba/smb.conf
+#     block: |
+       

@@ -17,7 +17,7 @@
 - name: Install required zypper packages
   ansible.builtin.include_role:
     name: zypper
-  when: ansible_distribution == "OpenSUSE Tumbleweed"
+  when: ansible_distribution.find("openSUSE") != -1
 
 - name: Mount Samba network drives
   ansible.builtin.include_role:

@@ -4,20 +4,21 @@
   vars_prompt:
     - name: samba_server_username
       prompt: Samba Server Username
-      default: dr720
+      default: ansible
 
     - name: samba_server_password
       prompt: Samba Server Password
-      default: dr720
+      default: ansible
 
     - name: samba_server_domain
       prompt: Samba Server Domain
-      default: dr720
+      default: ansible
 
 - hosts: all
   become: yes
   roles:
     - common
+    - flatpak
 
 - hosts: data_source_mounts
   become: yes
@@ -28,3 +29,8 @@
   become: yes
   roles:
     - apt
+
+- hosts: samba_server
+  become: yes
+  roles:
+    - samba_server

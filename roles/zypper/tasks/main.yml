@@ -1,0 +1,28 @@
+---
+
+- name: Apply all available patches
+  community.general.zypper:
+    name: '*'
+    state: latest
+    type: patch
+
+- name: Install common packages
+  community.general.zypper:
+    state: present
+    name:
+      - amarok
+      - fd
+      - fish
+      - flatpak
+      - fzf
+      - gkrellm
+      - neovim
+      - openssl
+      - samba*
+      - tmux
+      - vlc
+
+- name: Install samba
+  community.general.zypper:
+    name: samba*
+    state: present

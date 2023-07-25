@@ -1,2 +1,5 @@
-[apt]
-ubuntu.cartermeyer.us ansible_user=ansible
+[zepher]
+opensuse.cartermeyer.us ansible_user=ansible
+
+[samba_server]
+opensuse.cartermeyer.us ansible_user=ansible

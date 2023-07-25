@@ -2,10 +2,10 @@
 
 host_server: 192.168.7.29
 
-username: dr720
-samba_server_username: dr720
-samba_server_domain: dr720
-samba_server_password: dr720
+username: ansible
+samba_server_username: ansible
+samba_server_domain: ansible
+samba_server_password: ansible
 
 single_mounts:
   - name: 5TB
