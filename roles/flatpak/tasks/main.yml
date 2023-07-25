@@ -8,3 +8,7 @@
     name: com.brave.Browser
     state: present
 
+- name: FlatPak Install Synergy
+  community.general.flatpak:
+    name: https://api-functions.prod.a.symless.com/download-log?synergyVersion=3.0.72.1-rc1&operatingSystem=Linux&architecture=flatpak&downloadUrl=https%3A%2F%2Frc.symless.com%2Fsynergy3%2Fv3.0.72.1-rc1%2Fsynergy-linux_x64-libssl3-v3.0.72.1-rc1.flatpak&userId=889196
+    state: present
