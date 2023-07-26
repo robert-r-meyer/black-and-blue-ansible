@@ -29,21 +29,21 @@
 #     permanent: true
 #     state: enabled
 
-- name: Add ports to firewall 137
+- name: Add ports to firewall 137 Samba
   firewalld:
    port: "137/udp"
    state: enabled
    immediate: true
    permanent: true
 
-- name: Add ports to firewall 138
+- name: Add ports to firewall 138 Samba
   firewalld:
    port: "138/udp"
    state: enabled
    immediate: true
    permanent: true
 
-- name: Add ports to firewall 139
+- name: Add ports to firewall 139 Samba
   firewalld:
    port: "139/tcp"
    state: enabled
