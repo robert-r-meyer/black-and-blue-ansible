@@ -5,7 +5,7 @@
     name: mounts
     tasks_from: mounts
 
-- name: Fuck your
+- name: Distribution verification
   ansible.builtin.debug:
     var: ansible_distribution
     verbosity: 2
