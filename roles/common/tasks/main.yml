@@ -22,3 +22,4 @@
 - name: Mount Samba network drives
   ansible.builtin.include_role:
     name: emby
+  when: ansible_distribution == "Ubuntu"
