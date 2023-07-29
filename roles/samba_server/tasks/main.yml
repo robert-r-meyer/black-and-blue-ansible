@@ -1,26 +1,22 @@
 ---
 
-- name: Configure samba user
-  ansible.builtin.command:
-    cmd: "smbpasswd -a {{ samba_server_username|quote }} -n"
-
 - name: Add shares to smb.conf
   blockinfile:
     path: /etc/samba/smb.conf
     block: |
       [4TB]
       path = /media/4TB
-      valid users = ansible
+      valid users = "{{ samba_server_username }}"
       read only = no
 
       [5TB]
       path = /media/5TB
-      valid users = ansible
+      valid users = "{{ samba_server_username }}"
       read only = no
 
       [10TB]
       path = /media/10TB
-      valid users = ansible
+      valid users = "{{ samba_server_username }}"
       read only = no
 
 # - name: Open firewall ports

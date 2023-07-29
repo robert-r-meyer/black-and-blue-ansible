@@ -18,7 +18,6 @@
       - gkrellm
       - neovim
       - openssl
-      - samba*
       - tmux
       - vlc
 
@@ -26,3 +25,15 @@
   community.general.zypper:
     name: samba*
     state: present
+
+- name: Start smb.service
+  ansible.builtin.service:
+    name: smb.service
+    state: started
+    enabled: yes
+
+- name: Start nmb.service
+  ansible.builtin.service:
+    name: nmb.service
+    state: started
+    enabled: yes

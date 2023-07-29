@@ -31,16 +31,19 @@
 
 - name: Install required system packages
   apt:
+    state: latest
+    update_cache: true
     pkg:
       - apt-transport-https
       - ca-certificates
       - curl
-      - software-properties-common
+      - flatpak
       - python3-pip
-      - virtualenv
       - python3-setuptools
-    state: latest
-    update_cache: true
+      - samba
+      - smbclient
+      - software-properties-common
+      - virtualenv
 
 - name: Add Docker GPG apt Key
   apt_key:

@@ -3,3 +3,6 @@ opensuse.cartermeyer.us ansible_user=ansible
 
 [samba_server]
 opensuse.cartermeyer.us ansible_user=ansible
+
+[emby]
+192.168.7.218 ansible_user=ansible

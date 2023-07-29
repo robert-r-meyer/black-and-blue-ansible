@@ -6,8 +6,8 @@ services:
       # runtime: nvidia # Expose NVIDIA GPUs
       # network_mode: host # Enable DLNA and Wake-on-Lan
     volumes:
-      - //{{ remote_server }}/{{ remote_10_tb }}/emby-cache:/system/cache
-      - //{{ remote_server }}/{{ remote_10_tb }}/emby-metadata:/system/metadata
+      - //{{ local_server }}/{{ local_cache }}/emby-cache:/system/cache
+      - //{{ local_server }}/{{ local_metadata }}/emby-metadata:/system/metadata
 
       - //{{ remote_server }}/{{ remote_10_tb }}/Cartoons:/media/Cartoons
       - //{{ remote_server }}/{{ remote_10_tb }}/Comedy:/media/Comedy
@@ -20,7 +20,7 @@ services:
       - //{{ remote_server }}/{{ remote_5_tb }}/Music:/media/Music
       - //{{ remote_server }}/{{ remote_5_tb }}/track-days:/media/track-days
 
-      - //{{ remote_server }}/{{ remote_data }}/TV:/media/TV
+      - //{{ remote_server }}/{{ remote_4_tb }}/TV:/media/TV
     ports:
       - 8096:8096 # HTTP port
       - 8920:8920 # HTTPS port
