@@ -12,8 +12,6 @@ single_mounts:
     core_path: /media/5TB
   - name: 10TB
     core_path: /media/10TB
-  - name: 15
-    core_path: /media/15
-  - name: Data
-    core_path: /media/Data
+  - name: 4TB
+    core_path: /media/4TB
 
