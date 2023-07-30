@@ -20,19 +20,35 @@
     group: "{{ ansible_user }}"
     mode: "0644"
 
-- name: Mount local 3TB to fstab
-  ansible.posix.mount:
-    fstype: ext4
-    src: /dev/sdb1
-    path: /media/3TB
-    state: present
+# - name: Mount local 3TB to fstab
+#   ansible.posix.mount:
+#     fstype: ext4
+#     src: /dev/sdb1
+#     path: /media/3TB
+#     state: present
 
-- name: Mount local 4TB to fstab
-  ansible.posix.mount:
-    fstype: ext4
-    src: /dev/sdc1
+# - name: Mount local 4TB to fstab
+#   ansible.posix.mount:
+#     fstype: ext4
+#     src: /dev/sdc1
+#     path: /media/4TB
+#     state: present
+
+
+- name: Creates 4TB
+  file:
     path: /media/4TB
-    state: present
+    state: directory
+
+- name: Creates 5TB
+  file:
+    path: /media/5TB
+    state: directory
+
+- name: Creates 10TB
+  file:
+    path: /media/10TB
+    state: directory
 
 - name: Mount with Postfix
   ansible.posix.mount:

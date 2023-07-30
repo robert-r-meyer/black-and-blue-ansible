@@ -19,7 +19,7 @@
   ansible.posix.mount:
     src: "/{{ item.name }}"
     opts: "credentials=/home/{{ ansible_user }}/.smbcredentials,uid=444,gid=1"
-    fstype: cifs
+    fstype: "cifs"
     path: "{{ item.core_path }}"
     state: mounted
   with_items:

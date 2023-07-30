@@ -36,6 +36,7 @@
     pkg:
       - apt-transport-https
       - ca-certificates
+      - cifs-utils
       - curl
       - flatpak
       - python3-pip
