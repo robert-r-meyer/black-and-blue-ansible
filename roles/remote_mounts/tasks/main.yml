@@ -4,7 +4,15 @@
   debug:
     msg: "{{ item.name }}"
   with_items:
-    " {{ single_mounts }}"
+    "{{ single_mounts }}"
+
+
+- name: Make mountable directories
+  file:
+    path: "/media/{{ item.name }}"
+    state: directory
+  with_items:
+    "{{ single_mounts }}"
 
 - name: Template file to smbcredentials
   ansible.builtin.template:
