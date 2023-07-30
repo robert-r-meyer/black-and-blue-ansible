@@ -1,12 +1,5 @@
 ---
 
-- name: the list
-  debug:
-    msg: "{{ item.name }}"
-  with_items:
-    "{{ single_mounts }}"
-
-
 - name: Make mountable directories
   file:
     path: "/media/{{ item.name }}"
@@ -25,10 +18,11 @@
 - name: Mount with Postfix
   become: yes
   ansible.posix.mount:
-    src: "{{ item.name }}"
-    opts: "credentials=/home/{{ ansible_user }}/.smbcredentials,uid=444,gid=1"
+    src: "//{{ host_server }}/{{ item.name }}"
+    opts: "rw,credentials=/home/{{ ansible_user }}/.smbcredentials"
     fstype: "cifs"
     path: "{{ item.core_path }}"
     state: mounted
+
   with_items:
     "{{ single_mounts }}"
