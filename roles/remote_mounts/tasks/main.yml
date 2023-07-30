@@ -25,7 +25,7 @@
 - name: Mount with Postfix
   become: yes
   ansible.posix.mount:
-    src: "/{{ item.name }}"
+    src: "{{ item.name }}"
     opts: "credentials=/home/{{ ansible_user }}/.smbcredentials,uid=444,gid=1"
     fstype: "cifs"
     path: "{{ item.core_path }}"

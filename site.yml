@@ -20,11 +20,6 @@
     - common
     - flatpak
 
-- hosts: data_source_mounts
-  become: yes
-  roles:
-    - data_source_mounts
-
 - hosts: apt
   become: yes
   roles:
@@ -34,3 +29,8 @@
   become: yes
   roles:
     - samba_server
+
+- hosts: emby
+  become: yes
+  roles:
+    - emby
